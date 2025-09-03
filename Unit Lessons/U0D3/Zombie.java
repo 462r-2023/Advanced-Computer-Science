@@ -14,6 +14,12 @@ public class Zombie {
         System.out.println("Phillip ate " + phillip.humansEaten() + " humans.");
         Zombie brian = new Zombie();
         System.out.println(brian.growl());
+
+        System.out.println(brian.humansEaten());
+        brian.eatHuman();
+        System.out.println(brian.humansEaten());
+        brian.feast(14);
+        System.out.println(brian.humansEaten());
     }
 
     // methods (behaviors)
@@ -26,5 +32,13 @@ public class Zombie {
 
     public int humansEaten() {
         return humansEaten;
+    }
+
+    public void eatHuman() {
+        humansEaten++;
+    }
+
+    public void feast(int humanCount) {
+        humansEaten += humanCount;
     }
 }
