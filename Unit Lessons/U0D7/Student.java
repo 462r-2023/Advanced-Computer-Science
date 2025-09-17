@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Student {
     private String name, id;
     private int grade;
@@ -18,13 +16,36 @@ public class Student {
 
     public String generateId() {
         String s = "";
-        Random r = new Random();
         for (int i = 0; i < 7; i++) {
-            s += r.nextInt(10);
+            s += (int) (Math.random() * 10);
             if (i == 2)
                 s += "-";
         }
         return s;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
     }
 
     public String toString() {
