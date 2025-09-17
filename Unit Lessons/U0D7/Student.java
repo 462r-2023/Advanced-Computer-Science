@@ -1,7 +1,9 @@
 public class Student {
-    private String name, id;
+    private String name;
+    private String id;
     private int grade;
-    private Student latestOpp, recentFriend;
+    private Student latestOpp;
+    private Student recentFriend;
 
     public Student(String name) {
         this.name = name;
@@ -25,9 +27,15 @@ public class Student {
     public String generateId() {
         String s = "";
         for (int i = 0; i < 7; i++) {
-            s += (int) (Math.random() * 10);
-            if (i == 2)
+            if (i < 2) {
+                s += (int) (Math.random() * 8) + 1;
+            } else {
+                s += (int) (Math.random() * 10);
+            }
+
+            if (i == 2) {
                 s += "-";
+            }
         }
         return s;
     }
