@@ -1,6 +1,7 @@
 public class Student {
     private String name, id;
     private int grade;
+    private Student latestOpp, recentFriend;
 
     public Student(String name) {
         this.name = name;
@@ -14,6 +15,13 @@ public class Student {
         id = generateId();
     }
 
+    public Student(String name, Student latestOpp) {
+        this.name = name;
+        grade = 10;
+        id = generateId();
+        this.latestOpp = latestOpp;
+    }
+
     public String generateId() {
         String s = "";
         for (int i = 0; i < 7; i++) {
@@ -22,6 +30,16 @@ public class Student {
                 s += "-";
         }
         return s;
+    }
+
+    public String vibeCheck(Student other) {
+        if (other.getLatestOpp().equals(latestOpp)) {
+            recentFriend = other;
+            other.recentFriend = this;
+            return name + " and " + other.name + " are now friends! They both dislike " + latestOpp
+                    + ".";
+        }
+        return name + " and " + other.name + " have no common opps.";
     }
 
     public String getName() {
@@ -46,6 +64,29 @@ public class Student {
 
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+
+    public Student(String name, int grade, Student latestOpp) {
+        this.name = name;
+        this.grade = grade;
+        id = generateId();
+        this.latestOpp = latestOpp;
+    }
+
+    public Student getLatestOpp() {
+        return latestOpp;
+    }
+
+    public void setLatestOpp(Student latestOpp) {
+        this.latestOpp = latestOpp;
+    }
+
+    public Student getRecentFriend() {
+        return recentFriend;
+    }
+
+    public void setRecentFriend(Student recentFriend) {
+        this.recentFriend = recentFriend;
     }
 
     public String toString() {
