@@ -9,6 +9,18 @@ public class Line {
         this.c = c;
     }
 
+    public int getRandom() {
+        return (int) (Math.random() * 200 - 100);
+    }
+
+    public Line(boolean random) {
+        if (random) {
+            this.a = getRandom();
+            this.b = getRandom();
+            this.c = getRandom();
+        }
+    }
+
     public int getA() {
         return a;
     }
@@ -33,7 +45,7 @@ public class Line {
         this.c = c;
     }
 
-    public double CalculateSlope() {
+    public double calculateSlope() {
         return -(double) a / b;
     }
 
