@@ -11,9 +11,10 @@ public class Dog {
         this.name = name;
         this.ownerName = ownerName;
         this.age = age;
-        this.dogId = dogId;
         dogChar = PawesomeUtils.generateDogChar(dogId);
-        dogTag = PawesomeUtils.generateDogTag(dogId, dogChar);
+        this.dogId = PawesomeUtils.validateDogId(dogId);
+        dogChar = PawesomeUtils.generateDogChar(this.dogId);
+        dogTag = PawesomeUtils.generateDogTag(this.dogId, dogChar);
         stillInFacility = true;
     }
 
@@ -68,7 +69,9 @@ public class Dog {
     }
 
     public void setDogId(int dogId) {
-        this.dogId = dogId;
+        this.dogId = PawesomeUtils.validateDogId(dogId);
+        this.dogChar = PawesomeUtils.generateDogChar(this.dogId);
+        this.dogTag = PawesomeUtils.generateDogTag(this.dogId, this.dogChar);
     }
 
     public void setDogChar(char dogChar) {
@@ -94,8 +97,8 @@ public class Dog {
     }
 
     boolean equals(Dog other) {
-        return name == other.name && ownerName == other.ownerName && age == other.age
-                && dogId == other.dogId && dogChar == other.dogChar && dogTag == other.dogTag
+        return name.equals(other.name) && ownerName.equals(other.ownerName) && age == other.age
+                && dogId == other.dogId && dogChar == other.dogChar && dogTag.equals(other.dogTag)
                 && stillInFacility == other.stillInFacility;
     }
 }

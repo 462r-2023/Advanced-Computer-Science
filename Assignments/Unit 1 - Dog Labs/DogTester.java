@@ -43,8 +43,6 @@ public class DogTester {
         System.out.println("Dog2 in facility: " + dog2.isStillInFacility());
         System.out.println(PawesomeUtils.pickup(dog2, "Eli Vance"));
         System.out.println(PawesomeUtils.pickup(dog2, "Gordon Freeman"));
-        System.out.println(
-                "Gordon is a highly trained professional, he doesn't need to hear all this!");
         System.out.println("Dog2 in facility: " + dog2.isStillInFacility());
         PawesomeUtils.checkIn(dog2, "Alyx Vance");
         System.out.println("Dog2 checked");
@@ -58,5 +56,15 @@ public class DogTester {
         System.out.println("Valid dog tag for dog2: " + PawesomeUtils.validateDogTag(dog2));
         System.out.println("Valid dog tag for dog3: " + PawesomeUtils.validateDogTag(dog3));
 
+        System.out
+                .println("Dog1's age in human years: " + PawesomeUtils.convertAgeToHumanAge(dog1));
+        System.out
+                .println("Dog2's age in human years: " + PawesomeUtils.convertAgeToHumanAge(dog2));
+        System.out
+                .println("Dog3's age in human years: " + PawesomeUtils.convertAgeToHumanAge(dog3));
+
+        for (int i : new int[] {5, 7, 16, 49, 100}) {
+            System.out.println(i + " years in dog years: " + PawesomeUtils.convertAgeToDogYears(i));
+        }
     }
 }
