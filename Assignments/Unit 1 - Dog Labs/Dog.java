@@ -11,7 +11,6 @@ public class Dog {
         this.name = name;
         this.ownerName = ownerName;
         this.age = age;
-        dogChar = PawesomeUtils.generateDogChar(dogId);
         this.dogId = PawesomeUtils.validateDogId(dogId);
         dogChar = PawesomeUtils.generateDogChar(this.dogId);
         dogTag = PawesomeUtils.generateDogTag(this.dogId, dogChar);
