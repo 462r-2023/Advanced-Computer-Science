@@ -39,8 +39,8 @@ public class TriangleLoops {
             for (int j = i + 1; j < numberOfRows; j++) {
                 s += " ";
             }
-            for (int j = 0; j < i * 2 + 1; j++) {
-                s += (char) (65 + Math.abs(j - i));
+            for (int j = i * 2; j > -1; j--) {
+                s += (char) (65 + i - Math.abs(j - i));
             }
             s += "\n";
         }
