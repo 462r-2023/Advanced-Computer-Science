@@ -6,6 +6,11 @@ public class Unit3ExercisesTester {
         testFindMaxValue();
         testIsPalindrome();
         testSumEvenNumbers();
+        testSumOfSquares();
+        testGetNthFibonacci();
+        testSortArrayDescending();
+        testFindLongestWord();
+        testCalculateInterest();
     }
 
     public static void testCalculateStringLengthAverage() {
@@ -125,6 +130,123 @@ public class Unit3ExercisesTester {
             System.out.println(e.toString());
             System.out
                     .println("The method threw an exception when the array was null, as intended");
+        }
+    }
+
+    public static void testSumOfSquares() {
+        // Test Case - Main Case
+        int[] testArray = {1, 3, 4, 2};
+        System.out.println("Expected 30: " + Unit3Exercises.calculateSumOfSquares(testArray));
+
+        // Test Case - Edge Case: Null array
+        try {
+            testArray = null;
+            System.out.println(
+                    "Expected exception: " + Unit3Exercises.calculateSumOfSquares(testArray));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out
+                    .println("The method threw an exception when the array was null, as intended");
+        }
+    }
+
+    public static void testGetNthFibonacci() {
+        // Test Case - Main Case
+        System.out.println("Expected 13: " + Unit3Exercises.getNthFibonacci(7));
+
+        // Test Case - Edge Case: Negative number
+        try {
+            System.out.println("Expected exception: " + Unit3Exercises.getNthFibonacci(-1));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out.println(
+                    "The method threw an exception when the number was negative, as intended");
+        }
+    }
+
+    private static String printArray(int[] array) {
+        String s = "[";
+        for (int i : array) {
+            s += i + ", ";
+        }
+        return s.substring(0, s.length() - 2) + "]";
+    }
+
+    public static void testSortArrayDescending() {
+        // Test Case - Main Case
+        int[] testArray = {1, 3, 4, 2};
+        Unit3Exercises.sortArrayDescending(testArray);
+        System.out.println("Expected [4, 3, 2, 1]: " + printArray(testArray));
+
+        // Test Case - Main Case
+        testArray = new int[] {1, -3, 4, -2};
+        Unit3Exercises.sortArrayDescending(testArray);
+        System.out.println("Expected [4, 1, -2, -3]: " + printArray(testArray));
+
+        // Test Case - Edge Case: Null array
+        try {
+            testArray = null;
+            Unit3Exercises.sortArrayDescending(testArray);
+            System.out.println("Expected exception: " + testArray);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out
+                    .println("The method threw an exception when the array was null, as intended");
+        }
+    }
+
+    public static void testFindLongestWord() {
+        // Test Case - Main Case
+        String testString = "among us";
+        System.out.println("Expected among: " + Unit3Exercises.findLongestWord(testString));
+
+        // Test Case - Main Case
+        testString = "the brown fox jumps over the lazy dog";
+        System.out.println("Expected brown: " + Unit3Exercises.findLongestWord(testString));
+
+        // Test Case - Edge Case: Test with a null string.
+        try {
+            testString = null;
+            System.out.println("Expected exception: " + Unit3Exercises.findLongestWord(testString));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out
+                    .println("The method threw an exception when the string was null, as intended");
+        }
+    }
+
+    public static void testCalculateInterest() {
+        // Test Case - Main Case
+        System.out.println("Expected 121.0: " + Unit3Exercises.calculateInterest(100, 10, 2));
+
+        // Test Case - Edge Case: Test with a negative principal amount.
+        try {
+            System.out
+                    .println("Expected exception: " + Unit3Exercises.calculateInterest(-2, 10, 1));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out.println(
+                    "The method threw an exception when the principal amount was negative, as intended");
+        }
+
+        // Test Case - Edge Case: Test with a negative interest rate.
+        try {
+            System.out.println(
+                    "Expected exception: " + Unit3Exercises.calculateInterest(100, -10, 1));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out.println(
+                    "The method threw an exception when the interest rate was negative, as intended");
+        }
+
+        // Test Case - Edge Case: Test with zero years.
+        try {
+            System.out
+                    .println("Expected exception: " + Unit3Exercises.calculateInterest(100, 10, 0));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out.println(
+                    "The method threw an exception when the number of years was not positive, as intended");
         }
     }
 }

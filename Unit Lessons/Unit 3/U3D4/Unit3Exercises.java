@@ -72,4 +72,80 @@ public class Unit3Exercises {
         } // removed extra if statement
         return sum;
     }
+
+    public static int calculateSumOfSquares(int[] numbers) {
+        int sum = 0;
+        for (int i = 0; i < numbers.length; i++) { // Changed declaration of i from i = 1
+            sum += Math.pow(numbers[i], 2);
+        }
+        return sum;
+    }
+
+    public static int getNthFibonacci(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("Cannot get a negative fibonacci number.");
+        }
+
+        if (n <= 1) {
+            return n;
+        }
+
+        int a = 0, b = 1, c;
+        for (int i = 2; i <= n; i++) {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return b;
+    }
+
+    public static void sortArrayDescending(int[] arr) {
+        if (arr == null) {
+            throw new IllegalArgumentException("Cannot sort a null array.");
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] > arr[i]) { // Changed to greater than
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+    }
+
+    public static String findLongestWord(String sentence) {
+        if (sentence == null) {
+            throw new IllegalArgumentException("String cannot be null.");
+        }
+
+        String[] words = sentence.split(" ");
+        String longestWord = "";
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].length() > longestWord.length()) { // Changed to greater than
+                longestWord = words[i];
+            }
+        }
+        return longestWord;
+    }
+
+    public static double calculateInterest(double principal, double rate, int years) {
+        if (principal < 0) {
+            throw new IllegalArgumentException("The principal amount cannot be negative.");
+        }
+
+        if (rate < 0) {
+            throw new IllegalArgumentException("The interest rate cannot be negative.");
+        }
+
+        if (years <= 0) {
+            throw new IllegalArgumentException("The number of years must be a positive integer.");
+        }
+
+        for (int i = 0; i < years; i++) {
+            principal += principal * (rate / 100);
+        }
+        return principal;
+    }
 }
