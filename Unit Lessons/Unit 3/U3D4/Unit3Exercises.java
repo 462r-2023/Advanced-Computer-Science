@@ -148,4 +148,40 @@ public class Unit3Exercises {
         }
         return principal;
     }
+
+    public static int parsePositiveInteger(String str) {
+
+        int number = Integer.parseInt(str);
+        if (number <= 0) { // Added if statement
+            throw new NumberFormatException("Number must be positive!");
+        }
+        return number; // Method should return 1 if it's negative
+    }
+
+    public static String getArrayElement(String[] arr, int index) {
+
+        return arr[index];
+    }
+
+    public static double calculateSquareRoot(int number) {
+        if (number < 0)
+            throw new IllegalArgumentException(
+                    "Cannot calculate square root of a negative number.");
+        return Math.sqrt(number);
+    }
+
+    public static int sumArrayElements(int[] array) {
+
+        int sum = 0;
+        for (int i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        return sum;
+    }
+
+    public static double calculatePower(double base, int exponent) {
+        if (exponent <= 0)
+            throw new IllegalArgumentException("Exponent cannot be negative.");
+        return Math.pow(base, exponent);
+    }
 }
