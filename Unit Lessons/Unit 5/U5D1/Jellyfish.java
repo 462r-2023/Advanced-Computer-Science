@@ -52,7 +52,7 @@ public class Jellyfish extends Animal {
         this.tentacleLength = tentacleLength;
     }
 
-    public void eat() {
+    public void feed() {
         System.out.println("Eating fish");
         hunger = 0;
     }
@@ -73,5 +73,9 @@ public class Jellyfish extends Animal {
 
     public void resetAge() {
         setAge(0);
+    }
+
+    public String toString() {
+        return "Jellyfish \"" + getName() +"\"";
     }
 }

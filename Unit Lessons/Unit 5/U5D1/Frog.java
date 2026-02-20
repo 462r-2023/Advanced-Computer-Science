@@ -51,7 +51,7 @@ public class Frog extends Animal {
         this.jumpHeight = jumpHeight;
     }
 
-    public void eat() {
+    public void feed() {
         System.out.println("Eating flies");
         hunger = 0;
     }
@@ -68,5 +68,9 @@ public class Frog extends Animal {
 
     public void jump() {
         jump(jumpHeight);
+    }
+
+    public String toString() {
+        return "Frog \"" + getName() + "\"";
     }
 }
