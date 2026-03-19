@@ -2,7 +2,18 @@ public class MatrixFun {
     private int[][] matrix;
 
     public MatrixFun(int numberOfRows, int numberOfCols) {
-        this(new int[numberOfRows][numberOfCols]);
+        if (numberOfRows <= 0 || numberOfCols <= 0) {
+            throw new IllegalArgumentException("Dimensions cannot be negative!");
+        }
+        this.matrix = new int[numberOfRows][numberOfCols];
+    }
+
+    public int[][] getMatrix() {
+        return matrix;
+    }
+
+    public void setMatrix(int[][] matrix) {
+        this.matrix = matrix;
     }
 
     public MatrixFun(int[][] starterMatrix) {
@@ -44,6 +55,9 @@ public class MatrixFun {
     }
 
     public void swapRow(int rowA, int rowB) {
+        if (rowA < 0 || rowB < 0 || rowA >= matrix.length || rowB >= matrix.length) {
+            throw new IllegalArgumentException("Row cannot be negative!");
+        }
         int[] temp = matrix[rowA];
         matrix[rowA] = matrix[rowB];
         matrix[rowB] = temp;
