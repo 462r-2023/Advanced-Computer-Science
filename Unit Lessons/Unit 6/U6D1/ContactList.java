@@ -20,9 +20,13 @@ public class ContactList extends AbstractList {
      * alphabetized
      */
     private int findInsertLocation(String name) {
-        // You can use a sequential search here. But for a Stretch Challenge, try to do
-        // a binary search.
-        return 0;
+        int index = -1
+        for (int k = contactList.size(); k > 1; k /= 2) {
+            while (index + k < contactList.size() && name.compareTo() > 0) {
+                index += k;
+            }
+        }
+        return index + 1;
     }
 
     // to-do: add(String name)
@@ -34,26 +38,37 @@ public class ContactList extends AbstractList {
      */
     public boolean add(String name) {
         System.out.println("+ Adding " + name);
-        return false;
+        contactList.insert(name, findInsertLocation(name))
+        return true;
     }
 
     // to-do: add(ArrayList<String> names)
     /* this method adds a list of names to the contact list */
     public void add(ArrayList<String> names) {
-
+        for (String name : names) {
+            add(name);
+        }
     }
 
     // to-do: remove(String name)
     /** removes name from the contact list and keeps list alphabetized */
     public boolean remove(String name) {
         System.out.println("- Removing " + name);
-        return false;
+        int index = findInsertLocation(name);
+        index--;
+        if (index < 0 || contactList.equals(index)) {
+            return false;
+        }
+        contactList.remove(index);
+        return true;
     }
 
     // to-do: remove(ArrayList<String> names)
     /* this method removes a list of names from the contact list */
     public void remove(ArrayList<String> names) {
-
+        for (String name : names) {
+            remove(name);
+        }
     }
 
     /** returns a String containing all of the words in list */
@@ -64,19 +79,20 @@ public class ContactList extends AbstractList {
     // to-do: get(int index)
     /** returns the name at the specified index */
     public String get(int index) {
-        return null;
+        return contactList.get(index);;
     }
 
     // to-do: size()
     /** returns the number of names in the contact list */
     public int size() {
-        return 0;
+        return contactList.size();
     }
 
     // to-do: clear()
     /** removes all names from the contact list */
     public void clear() {
         System.out.println("Clearing the contact list");
+        contactList = new ArrayList<String>();
     }
 
 }
