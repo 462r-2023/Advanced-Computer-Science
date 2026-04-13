@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.AbstractList;
+import java.util.ArrayList;
 
 public class ContactList extends AbstractList {
 
@@ -9,20 +9,24 @@ public class ContactList extends AbstractList {
     // constructor
     // to-do: initializes an empty contact list
     public ContactList() {
+        contactList = new ArrayList<String>();
     }
 
     // methods
 
     // to-do: findInsertLocation(String name)
     /**
-     * returns the location in the contact list where the name should go to keep the
-     * list
+     * returns the location in the contact list where the name should go to keep the list
      * alphabetized
      */
     private int findInsertLocation(String name) {
-        int index = -1
-        for (int k = contactList.size(); k > 1; k /= 2) {
-            while (index + k < contactList.size() && name.compareTo() > 0) {
+        if (name == null || name == "") {
+            throw new IllegalArgumentException("Cannot find null or empty name.");
+        }
+        int index = -1;
+        for (int k = contactList.size(); k > 0; k /= 2) {
+            while (index + k < contactList.size()
+                    && name.compareTo(contactList.get(index + k)) >= 0) {
                 index += k;
             }
         }
@@ -31,20 +35,28 @@ public class ContactList extends AbstractList {
 
     // to-do: add(String name)
     /**
-     * adds a name to the contact list so that the list remains alphabetized, it
-     * prints out which
-     * name is being added, also the method prevents duplicate names from being
-     * added
+     * adds a name to the contact list so that the list remains alphabetized, it prints out which
+     * name is being added, also the method prevents duplicate names from being added
      */
     public boolean add(String name) {
+        if (name == null || name == "") {
+            throw new IllegalArgumentException("Cannot add null or empty name.");
+        }
         System.out.println("+ Adding " + name);
-        contactList.insert(name, findInsertLocation(name))
+        int index = findInsertLocation(name);
+        if (index > 0 && contactList.get(index - 1).equals(name)) {
+            return false;
+        }
+        contactList.add(findInsertLocation(name), name);
         return true;
     }
 
     // to-do: add(ArrayList<String> names)
     /* this method adds a list of names to the contact list */
     public void add(ArrayList<String> names) {
+        if (names == null) {
+            throw new IllegalArgumentException("Cannot add null ArrayList.");
+        }
         for (String name : names) {
             add(name);
         }
@@ -53,10 +65,13 @@ public class ContactList extends AbstractList {
     // to-do: remove(String name)
     /** removes name from the contact list and keeps list alphabetized */
     public boolean remove(String name) {
+        if (name == null || name == "") {
+            throw new IllegalArgumentException("Cannot remove null or empty name.");
+        }
         System.out.println("- Removing " + name);
         int index = findInsertLocation(name);
         index--;
-        if (index < 0 || contactList.equals(index)) {
+        if (index < 0 || !contactList.get(index).equals(name)) {
             return false;
         }
         contactList.remove(index);
@@ -66,6 +81,9 @@ public class ContactList extends AbstractList {
     // to-do: remove(ArrayList<String> names)
     /* this method removes a list of names from the contact list */
     public void remove(ArrayList<String> names) {
+        if (names == null) {
+            throw new IllegalArgumentException("Cannot remove null ArrayList.");
+        }
         for (String name : names) {
             remove(name);
         }
@@ -79,7 +97,7 @@ public class ContactList extends AbstractList {
     // to-do: get(int index)
     /** returns the name at the specified index */
     public String get(int index) {
-        return contactList.get(index);;
+        return contactList.get(index);
     }
 
     // to-do: size()
