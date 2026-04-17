@@ -1,0 +1,191 @@
+import java.util.AbstractList;
+import java.util.ArrayList;
+
+public class ContactList extends AbstractList {
+
+    // instance variable
+    private ArrayList<Contact> contactList;
+
+    // constructor
+    // to-do: initializes an empty contact list
+    public ContactList() {
+        contactList = new ArrayList<Contact>();
+    }
+
+    // methods
+
+    // to-do: findInsertLocation(String name)
+    /**
+     * returns the location in the contact list where the name should go to keep the list
+     * alphabetized
+     */
+    private int findInsertLocation(Contact name) {
+        if (name == null || name.firstName + name.lastName + name.telephoneNumber == "") {
+            throw new IllegalArgumentException("Cannot find null or empty name.");
+        }
+        int index = -1;
+        for (int k = contactList.size(); k > 0; k /= 2) {
+            while (index + k < contactList.size()
+                    && name.compareTo(contactList.get(index + k)) >= 0) {
+                index += k;
+            }
+        }
+        return index + 1;
+    }
+
+    private int findInsertLocationByLastName(String name) {
+        if (name == null || name == "") {
+            throw new IllegalArgumentException("Cannot find null or empty name.");
+        }
+        int index = -1;
+        for (int k = contactList.size(); k > 0; k /= 2) {
+            while (index + k < contactList.size()
+                    && name.compareTo(contactList.get(index + k).lastName) >= 0) {
+                index += k;
+            }
+        }
+        return index + 1;
+    }
+
+    private int findInsertLocationByTelephoneNumber(String name) {
+        if (name == null || name == "") {
+            throw new IllegalArgumentException("Cannot find null or empty name.");
+        }
+        int index = -1;
+        for (int k = contactList.size(); k > 0; k /= 2) {
+            while (index + k < contactList.size()
+                    && name.compareTo(contactList.get(index + k).telephoneNumber) >= 0) {
+                index += k;
+            }
+        }
+        return index + 1;
+    }
+
+    // to-do: add(String name)
+    /**
+     * adds a name to the contact list so that the list remains alphabetized, it prints out which
+     * name is being added, also the method prevents duplicate names from being added
+     */
+    public boolean add(Contact name) {
+        if (name == null || name.firstName + name.lastName + name.telephoneNumber == "") {
+            throw new IllegalArgumentException("Cannot add null or empty name.");
+        }
+        System.out.println("+ Adding " + name);
+        int index = findInsertLocation(name);
+        if ((index > 0 && contactList.get(index - 1).equals(name))
+                || searchContacts(name.telephoneNumber) != null) {
+            return false;
+        }
+        contactList.add(index, name);
+        return true;
+    }
+
+    // to-do: add(ArrayList<String> names)
+    /* this method adds a list of names to the contact list */
+    public void add(ArrayList<Contact> names) {
+        if (names == null) {
+            throw new IllegalArgumentException("Cannot add null ArrayList.");
+        }
+        for (Contact name : names) {
+            add(name);
+        }
+    }
+
+    // to-do: remove(String name)
+    /** removes name from the contact list and keeps list alphabetized */
+    public boolean remove(Contact name) {
+        if (name == null || name.firstName + name.lastName + name.telephoneNumber == "") {
+            throw new IllegalArgumentException("Cannot remove null or empty name.");
+        }
+        System.out.println("- Removing " + name);
+        int index = findInsertLocation(name);
+        index--;
+        if (index < 0 || !contactList.get(index).equals(name)) {
+            return false;
+        }
+        contactList.remove(index);
+        return true;
+    }
+
+    public boolean remove(Object name) {
+        return remove((Contact) name);
+    }
+
+    // to-do: remove(ArrayList<String> names)
+    /* this method removes a list of names from the contact list */
+    public void remove(ArrayList<String> names) {
+        if (names == null) {
+            throw new IllegalArgumentException("Cannot remove null ArrayList.");
+        }
+        for (String name : names) {
+            remove(name);
+        }
+    }
+
+    /** returns a String containing all of the words in list */
+    public String toString() {
+        return "Contact List: " + contactList.toString();
+    }
+
+    // to-do: get(int index)
+    /** returns the name at the specified index */
+    public Contact get(int index) {
+        return contactList.get(index);
+    }
+
+    // to-do: size()
+    /** returns the number of names in the contact list */
+    public int size() {
+        return contactList.size();
+    }
+
+    // to-do: clear()
+    /** removes all names from the contact list */
+    public void clear() {
+        System.out.println("Clearing the contact list");
+        contactList = new ArrayList<Contact>();
+    }
+
+    public void sortByFirstName() {
+        ArrayList<Contact> oldContactList = contactList;
+        clear();
+        for (Contact c : oldContactList) {
+            int index = findInsertLocation(c);
+            if (index <= 0 || !contactList.get(index - 1).equals(c)) {
+                contactList.add(index, c);
+            }
+        }
+    }
+
+    public void sortByLastName() {
+        ArrayList<Contact> oldContactList = contactList;
+        clear();
+        for (Contact c : oldContactList) {
+            int index = findInsertLocationByLastName(c.lastName);
+            if (index <= 0 || !contactList.get(index - 1).equals(c)) {
+                contactList.add(index, c);
+            }
+        }
+    }
+
+    public void sortByTelephoneNumber() {
+        ArrayList<Contact> oldContactList = contactList;
+        clear();
+        for (Contact c : oldContactList) {
+            int index = findInsertLocationByTelephoneNumber(c.telephoneNumber);
+            if (index <= 0
+                    || !contactList.get(index - 1).telephoneNumber.equals(c.telephoneNumber)) {
+                contactList.add(index, c);
+            }
+        }
+    }
+
+    public Contact searchContacts(String telephoneNumber) {
+        sortByTelephoneNumber();
+        int index = findInsertLocationByTelephoneNumber(telephoneNumber);
+        if (index > 0 && contactList.get(index - 1).telephoneNumber.equals(telephoneNumber)) {
+            return contactList.get(index - 1);
+        }
+        return null;
+    }
+}
